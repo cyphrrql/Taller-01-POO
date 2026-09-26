@@ -1,13 +1,11 @@
-// Renato Martínez 21.776.430-0 ITI
-// Alonso Arriagada 21.803.339-3 ITI
+// Renato Martínez - 21.776.430-0 - ITI
+// Alonso Arriagada - 21.803.339-3 - ITI
 package taller01;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Locale;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
@@ -88,14 +86,10 @@ public class Main {
                     default:
                         System.out.println("Opcion invalida. Ingrese un numero entre 1 y 7.");
                 }
-            } catch (NoSuchElementException e) {
-
-                System.out.println("No se detecto mas entrada de datos. Cerrando el sistema.");
-                continuar = false;
             } catch (Exception e) {
-
                 System.out.println("Ocurrio un error inesperado (" + e.getMessage()
                         + "). Se volvera al menu principal.");
+                continuar = false;
             }
         }
 
@@ -687,8 +681,13 @@ public class Main {
     }
 
     static String formatearPorcentaje(double valor) {
-
-        return String.format(Locale.US, "%.1f", valor);
+        long parteEntera = (long) valor;
+        long parteDecimal = Math.round((valor - parteEntera) * 10);
+        if (parteDecimal == 10) {
+            parteEntera++;
+            parteDecimal = 0;
+        }
+        return parteEntera + "." + parteDecimal;
     }
 
     static int contarSolicitudesDuplicadas() {
